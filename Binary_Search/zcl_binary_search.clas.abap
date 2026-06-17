@@ -20,7 +20,11 @@ ENDCLASS.
 CLASS zcl_binary_search IMPLEMENTATION.
 
   METHOD binary_search.
+    " Miramos en la tabla si hay algun valor como el pasado por parámetro
     READ TABLE table WITH KEY table_line = val BINARY SEARCH TRANSPORTING NO FIELDS.
+    
+    " Si no hay error, cogemos el indice del array
+    " Si hay error, lanzamos excepción
     IF sy-subrc IS INITIAL.
       result = sy-tabix.
     ELSE.
