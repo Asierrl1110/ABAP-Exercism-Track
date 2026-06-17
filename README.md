@@ -12,6 +12,7 @@ Cada ejercicio está documentado con su descripción, objetivos, reglas y ejempl
 | **Armstrong Numbers** | Comprobar si un número es narcisista. | [Solución](Armstrong_Numbers/zcl_armstrong_numbers.clas.abap)
 | **Atbash Cipher** | Implementar cifrado Atbash. | [Solución](Atbash_Cipher/zcl_atbash_cipher.clas.abap)
 | **Beer Song** | Generar la canción de las 99 botellas. | [Solución](Beer_Song/zcl_beer_song.clas.abap)
+| **Binary Search** | Busqueda binaria de un número de una lista. | [Solución](Binary_Search/zcl_binary_search.clas.abap)
 | **Clock** | Implementar un reloj con operaciones de tiempo. | [Solución](Clock/zcl_clock.clas.abap)
 | **Collatz Conjecture** | Calcular pasos hasta llegar a 1. | [Solución](Collatz_Conjecture/zcl_collatz_conjecture.clas.abap)
 | **Crypto Square** | Cifrar texto en cuadrícula. | [Solución](Crypto_Square/zcl_crypto_square.clas.abap)
