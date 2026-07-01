@@ -1,331 +1,55 @@
-# 📚 Book Store
+# Book Store
 
-## 📖 Descripción
+## Descripción
 
-Este ejercicio forma parte del track de **ABAP** de Exercism y está diseñado para practicar algoritmos, optimización, tablas internas y manipulación de colecciones.
+En este ejercicio vas a implementar un algoritmo que **calcule el precio mínimo de una cesta de libros** aplicando descuentos según el número de títulos diferentes comprados en un mismo grupo.
 
-El objetivo es calcular el **precio mínimo** de una cesta de libros aplicando correctamente una serie de descuentos. Cada libro cuesta el mismo precio base, pero al comprar **libros distintos** en un mismo grupo se obtiene un descuento creciente. El reto consiste en encontrar la combinación de grupos que produzca el coste total más bajo, ya que una agrupación aparentemente óptima no siempre genera el mejor resultado. :contentReference[oaicite:0]{index=0}
+El reto no consiste únicamente en aplicar los descuentos, sino en **encontrar la mejor forma de agrupar los libros**, ya que formar siempre el grupo más grande posible no garantiza el precio final más bajo.
 
-Durante el ejercicio trabajarás con:
+## Objetivo
 
-- Tablas internas.
-- Bucles.
-- Algoritmos de optimización.
-- Conteo de elementos.
-- Manipulación de colecciones.
-- Estrategias de agrupación.
+- Crear un método o función en ABAP que reciba una cesta con varios libros.
+- Agrupar los libros en conjuntos de títulos distintos.
+- Aplicar el descuento correspondiente a cada grupo.
+- Calcular el precio mínimo posible para toda la compra.
 
----
+## Reglas
 
-## 🎯 Objetivos
+Cada libro tiene un precio fijo de **8 €**.
 
-Implementar una función que:
+Los descuentos aplicables son:
 
-1. Reciba una cesta con varios libros.
-2. Agrupe los libros en conjuntos de títulos distintos.
-3. Aplique el descuento correspondiente a cada grupo.
-4. Encuentre la combinación con el menor precio posible.
-5. Devuelva el coste total de la compra. :contentReference[oaicite:1]{index=1}
+- **1 libro diferente:** sin descuento.
+- **2 libros diferentes:** 5 % de descuento.
+- **3 libros diferentes:** 10 % de descuento.
+- **4 libros diferentes:** 20 % de descuento.
+- **5 libros diferentes:** 25 % de descuento.
 
----
+Además:
 
-## 📂 Estructura del proyecto
+- Un mismo libro solo puede formar parte de un grupo una vez.
+- Si existen varias copias de un libro, deberán repartirse entre distintos grupos.
+- El algoritmo debe encontrar siempre la combinación de grupos que produzca el menor precio total.
 
-```text
-book_store.clas.abap
-book_store.clas.testclasses.abap
-```
+## Instrucciones para implementar
 
-- `book_store.clas.abap`: implementación de la solución.
-- `book_store.clas.testclasses.abap`: pruebas proporcionadas por Exercism.
+1. Define un método que reciba una colección con los identificadores de los libros comprados.
+2. Cuenta cuántas copias existen de cada título.
+3. Forma grupos de libros distintos.
+4. Calcula el precio de cada grupo aplicando el descuento correspondiente.
+5. Compara distintas agrupaciones cuando sea necesario para obtener el precio mínimo.
+6. Devuelve el importe total de la cesta.
 
----
+## Ejemplos de uso
 
-## 📝 Requisitos
+- Cesta: `[1]`  
+  Resultado: **8,00 €**.
 
-Implementar el método encargado de calcular el precio final de la cesta.
+- Cesta: `[1, 2]`  
+  Resultado: **15,20 €** (5 % de descuento).
 
-Parámetros:
+- Cesta: `[1, 2, 3, 4, 5]`  
+  Resultado: **30,00 €** (25 % de descuento).
 
-| Parámetro | Descripción |
-|-----------|-------------|
-| `basket` | Colección con los libros comprados |
-
-Debe devolver el precio mínimo posible tras aplicar todos los descuentos.
-
----
-
-## Precio de los libros
-
-Cada libro cuesta:
-
-```text
-8 €
-```
-
-antes de aplicar descuentos.
-
----
-
-## Descuentos
-
-| Libros distintos | Descuento |
-|------------------|-----------|
-| 1 | 0 % |
-| 2 | 5 % |
-| 3 | 10 % |
-| 4 | 20 % |
-| 5 | 25 % |
-
----
-
-## Ejemplos
-
-### Un libro
-
-Cesta:
-
-```text
-[1]
-```
-
-Precio:
-
-```text
-8 €
-```
-
----
-
-### Dos libros diferentes
-
-```text
-[1, 2]
-```
-
-Precio:
-
-```text
-16 €
-```
-
-Descuento:
-
-```text
-5 %
-```
-
-Resultado:
-
-```text
-15.20 €
-```
-
----
-
-### Cinco libros distintos
-
-```text
-[1,2,3,4,5]
-```
-
-Precio original:
-
-```text
-40 €
-```
-
-Descuento:
-
-```text
-25 %
-```
-
-Resultado:
-
-```text
-30 €
-```
-
----
-
-## El verdadero reto
-
-No siempre conviene formar el grupo más grande posible.
-
-Por ejemplo:
-
-```text
-[1,1,2,2,3,3,4,5]
-```
-
-Una agrupación sería:
-
-```text
-5 + 3
-```
-
-pero otra opción es:
-
-```text
-4 + 4
-```
-
-Y esta última resulta más barata, por lo que el algoritmo debe encontrar siempre la mejor combinación posible. :contentReference[oaicite:2]{index=2}
-
----
-
-## 💡 Posible enfoque
-
-### Contar las copias
-
-Determinar cuántas veces aparece cada libro.
-
----
-
-### Formar grupos
-
-Crear grupos con libros distintos.
-
----
-
-### Evaluar alternativas
-
-Comparar diferentes formas de agrupar los libros para encontrar el menor precio.
-
----
-
-### Calcular el coste
-
-Para cada grupo:
-
-```text
-precio = libros × 8 €
-```
-
-Aplicando después el descuento correspondiente.
-
----
-
-### Sumar el total
-
-El resultado final será la suma de todos los grupos.
-
----
-
-## Ejemplo paso a paso
-
-Cesta:
-
-```text
-1 1 2 2 3 3 4 5
-```
-
----
-
-Opción A
-
-```text
-5 libros
-3 libros
-```
-
-↓
-
-```text
-30 € + 21.60 €
-```
-
-↓
-
-```text
-51.60 €
-```
-
----
-
-Opción B
-
-```text
-4 libros
-4 libros
-```
-
-↓
-
-```text
-25.60 € + 25.60 €
-```
-
-↓
-
-```text
-51.20 €
-```
-
-La segunda opción es la correcta porque obtiene el precio mínimo. :contentReference[oaicite:3]{index=3}
-
----
-
-## Complejidad
-
-Una solución sencilla puede requerir probar múltiples agrupaciones.
-
-Dependiendo del algoritmo empleado:
-
-Tiempo:
-
-```text
-O(n²)
-```
-
-o superior para estrategias exhaustivas.
-
-Memoria:
-
-```text
-O(n)
-```
-
-para almacenar las agrupaciones temporales.
-
----
-
-## 🧠 Conceptos practicados
-
-- Tablas internas.
-- Bucles.
-- Conteo de frecuencias.
-- Optimización.
-- Algoritmos greedy.
-- Backtracking (opcional).
-- Manipulación de colecciones.
-- Diseño de algoritmos.
-
----
-
-## 🚀 Cómo ejecutar las pruebas
-
-Desde la raíz del proyecto:
-
-```bash
-exercism test
-```
-
-o utilizando el entorno de desarrollo de ABAP configurado para Exercism.
-
----
-
-## 📚 Recursos
-
-- Exercism ABAP Track. :contentReference[oaicite:4]{index=4}
-- Book Store Exercise Specification. :contentReference[oaicite:5]{index=5}
-- SAP ABAP Internal Tables.
-- Greedy Algorithms.
-- Backtracking Algorithms.
-
----
-
-**Dificultad:** Difícil  
-**Temática:** Optimización y algoritmos de agrupación  
-**Track:** ABAP
+- Cesta: `[1, 1, 2, 2, 3, 3, 4, 5]`  
+  Resultado: el algoritmo debe encontrar la agrupación que produzca **el menor precio posible**, aunque no sea la formada por el mayor número de libros distintos.
