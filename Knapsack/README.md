@@ -1,316 +1,76 @@
-# 🎒 Knapsack
+# Knapsack
 
-## 📖 Descripción
+## Descripción
 
-Este ejercicio forma parte del track de **ABAP** de Exercism y está diseñado para practicar programación dinámica, optimización y manipulación de tablas internas.
+En este ejercicio vas a implementar una solución al problema clásico de la **mochila (0/1 Knapsack Problem)**. Se dispone de una mochila con una capacidad máxima y de una colección de objetos, cada uno con un peso y un valor.
 
-El objetivo es resolver el clásico problema de la **mochila 0/1 (0/1 Knapsack Problem)**. Se dispone de una mochila con una capacidad máxima y de un conjunto de objetos, cada uno con un peso y un valor. Cada objeto puede escogerse **como máximo una vez**, y el objetivo es obtener el **máximo valor total** sin superar la capacidad de la mochila. :contentReference[oaicite:0]{index=0}
+El objetivo es **seleccionar la combinación de objetos que proporcione el mayor valor posible sin superar la capacidad de la mochila**. Cada objeto puede utilizarse **como máximo una vez**.
 
-Durante el ejercicio trabajarás con:
+## Objetivo
 
-- Tablas internas.
-- Bucles anidados.
-- Programación dinámica.
-- Optimización.
-- Algoritmos.
-- Manipulación de estructuras de datos.
+- Crear un método o función en ABAP que reciba una lista de objetos.
+- Cada objeto tendrá un peso y un valor asociados.
+- Calcular el valor máximo que puede obtenerse sin exceder la capacidad de la mochila.
+- Devolver únicamente el valor máximo alcanzable.
 
----
+## Reglas
 
-## 🎯 Objetivos
+- Cada objeto dispone de:
+  - Un **peso**.
+  - Un **valor**.
+- La mochila tiene una **capacidad máxima**.
+- Un objeto solo puede seleccionarse una vez.
+- El peso total de los objetos elegidos no puede superar la capacidad de la mochila.
+- Debe encontrarse siempre la combinación con el mayor valor posible.
 
-Implementar un método que permita:
+## Instrucciones para implementar
 
-1. Recibir una lista de objetos con su peso y valor.
-2. Recibir la capacidad máxima de la mochila.
-3. Seleccionar la mejor combinación de objetos.
-4. Maximizar el valor total sin exceder el peso permitido.
-5. Devolver el valor máximo alcanzable. :contentReference[oaicite:1]{index=1}
+1. Define un método que reciba la capacidad máxima de la mochila y la lista de objetos.
+2. Recorre los objetos disponibles evaluando si pueden añadirse a la mochila.
+3. Compara las distintas combinaciones posibles respetando la capacidad máxima.
+4. Calcula el valor total de cada combinación válida.
+5. Devuelve el mayor valor obtenido.
 
----
+> Una solución eficiente suele utilizar **programación dinámica**, almacenando los mejores resultados para cada capacidad parcial.
 
-## 📂 Estructura del proyecto
+## Ejemplos de uso
 
-```text
-knapsack.clas.abap
-knapsack.clas.testclasses.abap
-```
+- Objetos:
 
-- `knapsack.clas.abap`: implementación de la solución.
-- `knapsack.clas.testclasses.abap`: pruebas proporcionadas por Exercism.
+  | Peso | Valor |
+  |------|------:|
+  | 5 | 10 |
+  | 4 | 40 |
+  | 6 | 30 |
+  | 4 | 50 |
 
----
+  Capacidad: `10`
 
-## 📝 Requisitos
-
-Implementar el método encargado de calcular el valor máximo.
-
-Parámetros:
-
-| Parámetro | Descripción |
-|-----------|-------------|
-| `items` | Lista de objetos con peso y valor |
-| `maximum_weight` | Capacidad máxima de la mochila |
-
-Debe devolver el valor máximo que puede transportarse.
+  Resultado: **90**, seleccionando los objetos de peso **4** y **4**.
 
 ---
 
-## Cada objeto posee
+- Objetos:
 
-- Un peso.
-- Un valor.
+  | Peso | Valor |
+  |------|------:|
+  | 2 | 6 |
+  | 2 | 10 |
+  | 3 | 12 |
 
-Ejemplo:
+  Capacidad: `5`
 
-```text
-Peso: 4
-Valor: 50
-```
-
-Cada objeto solo puede utilizarse una vez.
+  Resultado: **22**, seleccionando los objetos de peso **2** y **3**.
 
 ---
 
-## Ejemplo
+- Objetos:
 
-Objetos:
+  | Peso | Valor |
+  |------|------:|
+  | 3 | 25 |
+  | 4 | 20 |
 
-```text
-Peso  Valor
+  Capacidad: `2`
 
-5      10
-4      40
-6      30
-4      50
-```
-
-Capacidad:
-
-```text
-10
-```
-
-La mejor elección es:
-
-```text
-Objeto 2
-Objeto 4
-```
-
-Peso total:
-
-```text
-8
-```
-
-Valor total:
-
-```text
-90
-```
-
-No existe ninguna otra combinación con mayor valor. :contentReference[oaicite:2]{index=2}
-
----
-
-## Otro ejemplo
-
-Objetos:
-
-```text
-Peso  Valor
-
-2      6
-2      10
-3      12
-```
-
-Capacidad:
-
-```text
-5
-```
-
-La mejor solución es:
-
-```text
-2 + 3
-```
-
-Peso:
-
-```text
-5
-```
-
-Valor:
-
-```text
-22
-```
-
----
-
-## Restricciones
-
-- Los pesos son positivos.
-- Los valores son positivos.
-- No se puede seleccionar un mismo objeto dos veces.
-- El peso total nunca puede superar la capacidad de la mochila. :contentReference[oaicite:3]{index=3}
-
----
-
-## 💡 Posible enfoque
-
-### Programación dinámica
-
-Crear una tabla donde cada posición represente el mejor valor posible para una determinada capacidad.
-
----
-
-### Recorrer los objetos
-
-Para cada objeto:
-
-```text
-Peso
-Valor
-```
-
-actualizar las soluciones posibles.
-
----
-
-### Decidir
-
-Para cada capacidad:
-
-- No utilizar el objeto.
-- Utilizar el objeto si cabe.
-
-Escoger siempre la opción con mayor valor.
-
----
-
-### Resultado
-
-La última posición de la tabla contendrá el valor máximo alcanzable.
-
----
-
-## Ejemplo paso a paso
-
-Capacidad:
-
-```text
-5
-```
-
-Objetos:
-
-```text
-(2,6)
-
-(2,10)
-
-(3,12)
-```
-
----
-
-Primer objeto:
-
-```text
-Valor máximo
-
-6
-```
-
----
-
-Segundo objeto:
-
-```text
-16
-```
-
----
-
-Tercer objeto:
-
-```text
-22
-```
-
-Resultado final:
-
-```text
-22
-```
-
----
-
-## Complejidad
-
-Con programación dinámica:
-
-Tiempo:
-
-```text
-O(n × W)
-```
-
-donde:
-
-- `n` es el número de objetos.
-- `W` es la capacidad máxima.
-
-Memoria:
-
-```text
-O(W)
-```
-
-si se utiliza una única fila de la tabla de programación dinámica.
-
----
-
-## 🧠 Conceptos practicados
-
-- Programación dinámica.
-- Optimización.
-- Tablas internas.
-- Bucles.
-- Algoritmos.
-- Maximización.
-- Manipulación de estructuras.
-- Complejidad algorítmica.
-
----
-
-## 🚀 Cómo ejecutar las pruebas
-
-Desde la raíz del proyecto:
-
-```bash
-exercism test
-```
-
-o utilizando el entorno ABAP configurado para Exercism.
-
----
-
-## 📚 Recursos
-
-- Exercism ABAP Track. :contentReference[oaicite:4]{index=4}
-- Knapsack Exercise Specification. :contentReference[oaicite:5]{index=5}
-- Dynamic Programming.
-- Knapsack Problem (0/1).
-- SAP ABAP Internal Tables.
-
----
-
-**Dificultad:** Media-Alta  
-**Temática:** Programación dinámica y optimización  
-**Track:** ABAP
+  Resultado: **0**, ya que ningún objeto cabe en la mochila.
